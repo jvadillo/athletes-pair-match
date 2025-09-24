@@ -26,14 +26,14 @@ const PlayerNameInput: React.FC<PlayerNameInputProps> = ({
     
     // Validate player name
     if (playerName.length < 3 || playerName.length > 16) {
-      toast.error("Player 1 name must be between 3 and 16 characters");
+      toast.error(t("player1NameTooShort"));
       return;
     }
     
     // In multiplayer mode, validate player 2 name
     if (gameMode === "multiplayer") {
       if (player2Name.length < 3 || player2Name.length > 16) {
-        toast.error("Player 2 name must be between 3 and 16 characters");
+        toast.error(t("player2NameTooShort"));
         return;
       }
       
@@ -50,7 +50,7 @@ const PlayerNameInput: React.FC<PlayerNameInputProps> = ({
         <div className="mb-6 text-center">
           <h1 className="text-3xl font-bold tracking-tight mb-2 flex items-center justify-center">
             <span className="font-dancing text-5xl text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-blue-400 app-title">
-              Eureka
+              Inspiring
             </span>
             <Lightbulb className="mx-2 h-9 w-9 text-[#9334ea] inline-block" strokeWidth={1.5} />
             <span className="font-dancing text-5xl text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-blue-400 app-title">

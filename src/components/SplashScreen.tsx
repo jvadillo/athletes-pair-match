@@ -24,7 +24,7 @@ const SplashScreen: React.FC<SplashScreenProps> = ({
         <div className="mb-6 text-center">
           <h1 className="text-3xl font-bold tracking-tight mb-2 flex items-center justify-center">
             <span className="font-dancing text-5xl text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-blue-400 app-title">
-              Inspira
+              Inspiring
             </span>
             {/* <Lightbulb className="mx-2 h-9 w-9 text-[#9334ea] inline-block" strokeWidth={1.5} /> */}
             <span className="font-dancing text-5xl text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-blue-400 app-title">

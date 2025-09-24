@@ -11,8 +11,10 @@ import { saveGameResult } from "./game/GameResultService";
 import { useIsMobile } from "@/hooks/use-mobile";
 import LanguageSelector from "./LanguageSelector";
 import { AnimatePresence, motion } from "framer-motion";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const GameBoard: React.FC = () => {
+  const { t } = useLanguage();
   const isMobile = useIsMobile();
   const [showNameInput, setShowNameInput] = useState(false);
   const [selectedGameMode, setSelectedGameMode] = useState<"single" | "multiplayer">("single");
@@ -40,7 +42,7 @@ const GameBoard: React.FC = () => {
   } = gameState;
 
   const handleSaveScore = async () => {
-    await saveGameResult(playerName, time, moves);
+    await saveGameResult(playerName, time, moves, t);
   };
 
   const handleSelectGameMode = (mode: "single" | "multiplayer") => {

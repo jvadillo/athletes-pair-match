@@ -60,18 +60,18 @@ export const useGameLogic = () => {
       }));
       
       if (gameMode === "single") {
-        toast.success("You've completed the game!");
+        toast.success(t("gameCompleted"));
       } else {
         if (score > player2Score) {
-          toast.success(`${playerName} wins!`);
+          toast.success(`${playerName} ${t("playerWins")}`);
         } else if (player2Score > score) {
-          toast.success(`${player2Name} wins!`);
+          toast.success(`${player2Name} ${t("playerWins")}`);
         } else {
-          toast.info("It's a tie!");
+          toast.info(t("itsATie"));
         }
       }
     }
-  }, [cards, score, player2Score, playerName, player2Name, gameMode]);
+  }, [cards, score, player2Score, playerName, player2Name, gameMode, t]);
 
   const determineWinner = (state: GameState): string => {
     if (state.gameMode !== "multiplayer") return state.playerName;
@@ -221,7 +221,7 @@ export const useGameLogic = () => {
     initGame();
     setShowCountdown(true);
     startCountdown();
-    toast.info("Game restarted!");
+    toast.info(t("gameRestarted"));
   };
 
   const setGameWon = (value: boolean) => {

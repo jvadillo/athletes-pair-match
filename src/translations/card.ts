@@ -3,11 +3,11 @@ import { Translations } from '@/contexts/LanguageContext';
 
 export const cardTranslations: Translations = {
   "matchFound": {
-    "en": "Eureka!",
-    "es": "Eureka!",
-    "eu": "Eureka!",
-    "ca": "Eureka!",
-    "gl": "Eureka!"
+    "en": "A Match Found!",
+    "es": "¡Pareja encontrada!",
+    "eu": "Bikote bat aurkitu duzu!",
+    "ca": "S'ha trobat un emparellament!",
+    "gl": "Atopouse un emparellamento!"
   },
   "cardQuestion": {
     en: "?",

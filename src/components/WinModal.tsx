@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { X, Trophy, Home } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
@@ -40,13 +40,7 @@ const WinModal: React.FC<WinModalProps> = ({
     return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
   };
 
-  useEffect(() => {
-    if (isOpen && !scoreSaved) {
-      saveScore();
-    }
-  }, [isOpen]);
-
-  const saveScore = async () => {
+  const saveScore = useCallback(async () => {
     if (!isOpen || scoreSaved) return;
     
     setIsLoading(true);
@@ -85,14 +79,20 @@ const WinModal: React.FC<WinModalProps> = ({
       setTotalPlayers(count || 0);
       setScoreSaved(true);
       
-      toast.success("Your score has been saved!");
+      toast.success(t("scoreHasBeenSaved"));
     } catch (error) {
       console.error("Error saving score:", error);
-      toast.error("Failed to save your score. Please try again.");
+      toast.error(t("failedToSaveScore"));
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [isOpen, scoreSaved, playerName, time, moves, t]);
+
+  useEffect(() => {
+    if (isOpen && !scoreSaved) {
+      saveScore();
+    }
+  }, [isOpen, saveScore, scoreSaved]);
 
   if (!isOpen) return null;
 
