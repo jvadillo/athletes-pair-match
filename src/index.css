@@ -178,30 +178,18 @@
   opacity: 1;
 }
 
-/* Firefox-specific fixes */
-@-moz-document url-prefix() {
+/* Additional Firefox compatibility */
+@supports (-moz-appearance: none) {
   .card-front, .card-back {
-    -moz-transform-style: preserve-3d;
+    transform-style: preserve-3d;
   }
   
   .card-container:not(.flipped) .card-back {
-    visibility: hidden;
-    opacity: 0;
+    transform: rotateY(180deg) translateZ(-1px);
   }
   
   .card-container.flipped .card-front {
-    visibility: hidden;
-    opacity: 0;
-  }
-  
-  .card-container:not(.flipped) .card-front {
-    visibility: visible;
-    opacity: 1;
-  }
-  
-  .card-container.flipped .card-back {
-    visibility: visible;
-    opacity: 1;
+    transform: rotateY(0deg) translateZ(-1px);
   }
 }
 
