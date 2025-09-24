@@ -52,7 +52,7 @@ const PlayerNameInput: React.FC<PlayerNameInputProps> = ({
             <span className="font-dancing text-5xl text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-blue-400 app-title">
               Inspiring
             </span>
-            <Lightbulb className="mx-2 h-9 w-9 text-[#9334ea] inline-block" strokeWidth={1.5} />
+            {/* <Lightbulb className="mx-2 h-9 w-9 text-[#9334ea] inline-block" strokeWidth={1.5} /> */}
             <span className="font-dancing text-5xl text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-blue-400 app-title">
               Girls
             </span>

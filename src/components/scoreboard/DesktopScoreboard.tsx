@@ -27,9 +27,9 @@ const DesktopScoreboard: React.FC<ScoreboardProps> = ({
     <div className="animate-fade-in flex flex-col rounded-xl bg-white p-5 shadow-md scoreboard-content">
       <div className="mb-4 text-center">
         <h2 className="flex items-center justify-center mb-1">
-          <span className="font-dancing text-4xl text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-blue-400 app-title">Eureka</span>
-          <Lightbulb className="mx-2 h-8 w-8 text-[#9334ea]" strokeWidth={1.5} />
-          <span className="font-dancing text-4xl text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-blue-400 app-title">Girls</span>
+          <span className="font-dancing text-4xl text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-blue-400 app-title">Inspiring</span>
+          {/* <Lightbulb className="mx-2 h-8 w-8 text-[#9334ea]" strokeWidth={1.5} /> */}
+          <span className="font-dancing text-4xl text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-blue-400 app-title">!Girls</span>
         </h2>
         <p className="text-sm text-gray-500 app-description">{t("appDescription")}</p>
       </div>
