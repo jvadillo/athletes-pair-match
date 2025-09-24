@@ -1,0 +1,7 @@
+{
+  "name": "verify-deployment",
+  "version": "1.0.0",
+  "scripts": {
+    "verify-build": "node scripts/verify-build.js"
+  }
+}

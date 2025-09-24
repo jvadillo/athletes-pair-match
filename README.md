@@ -38,6 +38,25 @@ npm install
 npm run dev
 ```
 
+## Deployment
+
+### Netlify
+```bash
+# Build and verify for deployment
+npm run deploy
+
+# Or manually:
+npm run build
+npm run verify-build
+```
+
+The project includes Netlify-specific configuration files:
+- `netlify.toml` - Main Netlify configuration
+- `public/_headers` - MIME type headers for JS/CSS files
+- `public/_redirects` - SPA routing configuration
+
+See [docs/NETLIFY_DEPLOYMENT.md](docs/NETLIFY_DEPLOYMENT.md) for detailed deployment instructions.
+
 ## Technologies Used
 
 - **Frontend**: React, TypeScript, Tailwind CSS
