@@ -5,11 +5,11 @@ import { Translations, Language } from '@/contexts/LanguageContext';
 export const splashScreenTranslations: Translations = {
   // Splash screen
   "welcomeText": {
-    en: "Match scientists with their achievements",
-    es: "Empareja científicas con sus logros",
-    eu: "Zientzialariak eta haien lorpenak lotu",
-    ca: "Emparella científiques amb els seus assoliments",
-    gl: "Emparella científicas cos seus logros"
+    en: "Match athletes with their achievements",
+    es: "Empareja a las deportistas con sus logros",
+    eu: "Kirolariak eta haien lorpenak lotu",
+    ca: "Emparella esportistes amb els seus assoliments",
+    gl: "Emparella deportistas cos seus logros"
   },
   "singlePlayer": {
     en: "1 Player",
