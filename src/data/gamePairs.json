@@ -1,0 +1,40 @@
+{
+  "pairs": [
+    {
+      "id": 1,
+      "personKey": "aitana_bonmati",
+      "achievementKey": "achievement1",
+      "color": "gamePurple"
+    },
+    {
+      "id": 2,
+      "personKey": "carolina_marin",
+      "achievementKey": "achievement2",
+      "color": "gameBlue"
+    },
+    {
+      "id": 3,
+      "personKey": "edurne_pasaban",
+      "achievementKey": "achievement3",
+      "color": "gameGreen"
+    },
+    {
+      "id": 4,
+      "personKey": "nuria_picas",
+      "achievementKey": "achievement4",
+      "color": "gamePink"
+    },
+    {
+      "id": 5,
+      "personKey": "garbine_muguruza",
+      "achievementKey": "achievement5",
+      "color": "gameOrange"
+    },
+    {
+      "id": 6,
+      "personKey": "mireia_belmonte",
+      "achievementKey": "achievement6",
+      "color": "gameTeal"
+    }
+  ]
+}

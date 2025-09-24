@@ -1,0 +1,98 @@
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  #root {
+    padding: 0;
+    max-width: 100%;
+  }
+  
+  /* Aumentar el tamaño del texto en el panel superior para móviles */
+  .scoreboard-text {
+    font-size: 1.2rem !important;
+  }
+  
+  .player-name {
+    font-size: 1.2rem !important;
+  }
+  
+  .score-text {
+    font-size: 1.3rem !important;
+  }
+  
+  /* Aumentar el tamaño de los iconos */
+  .mobile-icon {
+    width: 1.1rem !important;
+    height: 1.1rem !important;
+  }
+  
+  /* Smaller font for ranking table on mobile */
+  .ranking-table-mobile {
+    font-size: 0.85rem !important;
+  }
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+/* Make all text uppercase */
+button, p, h2, h3, h4, h5, h6, span, div, a, label, input, textarea, select {
+  text-transform: uppercase !important;
+}
+
+/* Excepciones para el título de la app y el h1 */
+.app-title, h1 {
+  text-transform: none !important;
+}
+
+/* Excepciones para la descripción bajo el título y el panel de puntuación */
+.app-description, .scoreboard-content, .landing-page-description {
+  text-transform: none !important;
+}
+
+/* Gradient text styling for app title */
+.title-gradient {
+  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
