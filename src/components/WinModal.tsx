@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { X, Trophy, Home } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
+import { saveGameCompletion, countBetterCompletions, getTotalCompletions } from "@/lib/api-client";
 import { toast } from "sonner";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -46,37 +46,16 @@ const WinModal: React.FC<WinModalProps> = ({
     setIsLoading(true);
     
     try {
-      // Insert the score
-      const { error: insertError } = await supabase
-        .from("game_completions")
-        .insert([
-          { 
-            player_name: playerName, 
-            completion_time: time, 
-            moves: moves 
-          }
-        ]);
+      // Save game completion and get rank info in one call
+      const { data, error } = await saveGameCompletion(playerName, time, moves);
         
-      if (insertError) throw insertError;
+      if (error || !data) {
+        throw new Error(error?.detail || "Failed to save score");
+      }
       
-      // Get the player's rank
-      const { data: betterScores, error: rankError } = await supabase
-        .from("game_completions")
-        .select("id")
-        .lt("completion_time", time);
-        
-      if (rankError) throw rankError;
-      
-      // Get total number of players
-      const { count, error: countError } = await supabase
-        .from("game_completions")
-        .select("id", { count: "exact", head: true });
-        
-      if (countError) throw countError;
-      
-      // Calculate rank (adding 1 because ranks start at 1, not 0)
-      setRank((betterScores?.length || 0) + 1);
-      setTotalPlayers(count || 0);
+      // Set rank and total players from response
+      setRank(data.rank || null);
+      setTotalPlayers(data.total_players || 0);
       setScoreSaved(true);
       
       toast.success(t("scoreHasBeenSaved"));

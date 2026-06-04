@@ -1,17 +1,15 @@
 
-import { supabase } from "@/integrations/supabase/client";
+import { saveGameCompletion } from "@/lib/api-client";
 import { toast } from "sonner";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export const saveGameResult = async (playerName: string, time: number, moves: number, t: (key: string) => string) => {
   try {
-    const { error } = await supabase.from("game_completions").insert({
-      player_name: playerName,
-      completion_time: time,
-      moves: moves
-    });
+    const { data, error } = await saveGameCompletion(playerName, time, moves);
     
-    if (error) throw error;
+    if (error || !data) {
+      throw new Error(error?.detail || "Failed to save game result");
+    }
     
     toast.success(t("scoreHasBeenSaved"));
     return true;

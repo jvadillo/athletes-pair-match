@@ -1,0 +1,80 @@
+version: '3.8'
+
+# Shared network for all backends
+networks:
+  shared_backend_network:
+    driver: bridge
+
+# Shared volumes
+volumes:
+  postgres_data:
+    driver: local
+
+services:
+  # Shared PostgreSQL container for all backends
+  postgres:
+    image: postgres:16-alpine
+    container_name: shared_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change-this-password}
+      # Multiple databases will be created as needed
+      POSTGRES_MULTIPLE_DATABASES: athletes_match_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-db.sh:/docker-entrypoint-initdb.d/init-db.sh:ro
+    networks:
+      - shared_backend_network
+    ports:
+      - "5432:5432"  # Only for development, remove in production
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Athletes Pair Match API
+  athletes-match-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: athletes_match_api
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-change-this-password}@postgres:5432/athletes_match_db
+      SECRET_KEY: ${SECRET_KEY:-change-this-secret-key}
+      API_PORT: 8000
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:5173}
+      RATE_LIMIT_PER_MINUTE: ${RATE_LIMIT_PER_MINUTE:-60}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+    ports:
+      - "8000:8000"  # Change port for each additional backend (8001, 8002, etc.)
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - shared_backend_network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8000/api/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # Example: Add more backends here
+  # another-api:
+  #   build:
+  #     context: ../another-backend
+  #     dockerfile: Dockerfile
+  #   container_name: another_api
+  #   restart: unless-stopped
+  #   environment:
+  #     DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-change-this-password}@postgres:5432/another_db
+  #   ports:
+  #     - "8001:8000"
+  #   depends_on:
+  #     postgres:
+  #       condition: service_healthy
+  #   networks:
+  #     - shared_backend_network

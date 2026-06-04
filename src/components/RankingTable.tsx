@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { getLeaderboard } from "@/lib/api-client";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { formatDistanceToNow } from "date-fns";
@@ -31,16 +31,13 @@ const RankingTable: React.FC<RankingTableProps> = ({ onBack }) => {
       try {
         setLoading(true);
         
-        const { data, error } = await supabase
-          .from("game_completions")
-          .select("*")
-          .order("completion_time", { ascending: true });
+        const { data, error } = await getLeaderboard();
 
-        if (error) {
-          throw error;
+        if (error || !data) {
+          throw new Error(error?.detail || "Failed to fetch leaderboard");
         }
 
-        setRankings(data || []);
+        setRankings(data);
       } catch (err) {
         console.error("Error fetching rankings:", err);
         setError(t("errorRankings"));
