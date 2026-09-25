@@ -14,7 +14,7 @@ export const winModalTranslations: Translations = {
   "matchedAllPairs": {
     en: "You've successfully matched all the pairs!",
     es: "¡Has emparejado con éxito todas las parejas!",
-    eu: "Bikote guztiak arrakastaz lotu dituzu!",
+    eu: "Bikote guztiak lotu dituzu!",
     ca: "Has emparellat amb èxit totes les parelles!",
     gl: "Emparellaches con éxito todas as parellas!"
   },
@@ -56,7 +56,7 @@ export const winModalTranslations: Translations = {
   "viewAllRankings": {
     en: "View All Rankings",
     es: "Ver Todas las Clasificaciones",
-    eu: "Ikusi Sailkapen Guztiak",
+    eu: "Sailkapena ikusi",
     ca: "Veure Totes les Classificacions",
     gl: "Ver Todas as Clasificacións"
   },
