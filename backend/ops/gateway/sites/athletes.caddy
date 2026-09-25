@@ -1,0 +1,13 @@
+https://2.28.118.113 {
+    tls {
+        issuer acme {
+            dir https://acme-v02.api.letsencrypt.org/directory
+            profile shortlived
+        }
+    }
+    encode zstd gzip
+    request_body {
+        max_size 16KB
+    }
+    reverse_proxy 127.0.0.1:8000
+}

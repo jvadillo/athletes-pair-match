@@ -1,0 +1,56 @@
+name: athletes-pair-match
+
+x-logging: &logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: athletes
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+      POSTGRES_DB: athletes_match_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks: [database]
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U athletes -d athletes_match_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    logging: *logging
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.production
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://athletes:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@postgres:5432/athletes_match_db
+      SECRET_KEY: ${SECRET_KEY:?Set SECRET_KEY in .env}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:5173}
+      LOG_LEVEL: INFO
+      FORWARDED_ALLOW_IPS: ${PROXY_TRUSTED_IPS:-127.0.0.1}
+    ports:
+      - "127.0.0.1:8000:8000"
+    networks: [database, ingress]
+    depends_on:
+      postgres:
+        condition: service_healthy
+    read_only: true
+    tmpfs: [/tmp]
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    logging: *logging
+
+volumes:
+  postgres_data:
+
+networks:
+  database:
+    internal: true
+  ingress:
