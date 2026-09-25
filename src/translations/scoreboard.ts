@@ -105,7 +105,7 @@ export const scoreboardTranslations: Translations = {
   "completedColumn": {
     en: "Completed",
     es: "Completado",
-    eu: "Osatuta",
+    eu: "Noiz",
     ca: "Completat",
     gl: "Completado"
   },
