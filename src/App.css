@@ -84,7 +84,7 @@ button, p, h2, h3, h4, h5, h6, span, div, a, label, input, textarea, select {
 }
 
 /* Excepciones para la descripción bajo el título y el panel de puntuación */
-.app-description, .scoreboard-content, .landing-page-description {
+.app-description, .scoreboard-content, .landing-page-description, .athlete-text {
   text-transform: none !important;
 }
 

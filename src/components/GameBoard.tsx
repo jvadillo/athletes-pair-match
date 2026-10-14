@@ -10,6 +10,7 @@ import MultiplayerWinModal from "./game/MultiplayerWinModal";
 import { saveGameResult } from "./game/GameResultService";
 import { useIsMobile } from "@/hooks/use-mobile";
 import LanguageSelector from "./LanguageSelector";
+import AthleteProfiles from "./AthleteProfiles";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -19,6 +20,7 @@ const GameBoard: React.FC = () => {
   const [showNameInput, setShowNameInput] = useState(false);
   const [selectedGameMode, setSelectedGameMode] = useState<"single" | "multiplayer">("single");
   const [showLanguageSelector, setShowLanguageSelector] = useState(false);
+  const [showAthletes, setShowAthletes] = useState(false);
 
   const {
     gameState,
@@ -83,6 +85,14 @@ const GameBoard: React.FC = () => {
     );
   }
 
+  if (showAthletes) {
+    return (
+      <div className="flex justify-center items-start w-full">
+        <AthleteProfiles onBack={() => setShowAthletes(false)} />
+      </div>
+    );
+  }
+
   if (showRankings) {
     return (
       <div className={`flex justify-center ${isMobile ? 'items-start pt-0' : 'items-center min-h-[60vh]'}`}>
@@ -109,6 +119,7 @@ const GameBoard: React.FC = () => {
         <SplashScreen 
           onStartGame={handleStartGame} 
           onViewRankings={() => setShowRankings(true)}
+          onViewAthletes={() => setShowAthletes(true)}
           onSelectGameMode={handleSelectGameMode}
           onSelectLanguage={handleSelectLanguage}
         />

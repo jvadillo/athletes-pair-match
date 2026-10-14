@@ -1,18 +1,20 @@
 
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { User, Users, Trophy, Globe, Lightbulb } from "lucide-react";
+import { User, Users, Trophy, Globe, Lightbulb, Sparkles } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 interface SplashScreenProps {
   onStartGame: (playerName: string, gameMode: "single" | "multiplayer") => void;
   onViewRankings: () => void;
+  onViewAthletes: () => void;
   onSelectGameMode: (mode: "single" | "multiplayer") => void;
   onSelectLanguage: () => void;
 }
 
 const SplashScreen: React.FC<SplashScreenProps> = ({ 
   onViewRankings, 
+  onViewAthletes,
   onSelectGameMode,
   onSelectLanguage
 }) => {
@@ -51,6 +53,15 @@ const SplashScreen: React.FC<SplashScreenProps> = ({
           >
             <Users className="mr-2 h-5 w-5" />
             {t("twoPlayers")}
+          </Button>
+          
+          <Button 
+            onClick={onViewAthletes}
+            className="group w-full bg-gradient-to-r from-pink-500 to-[#9334ea] hover:from-pink-600 hover:to-[#8429d6] text-white py-6"
+            variant="default"
+          >
+            <Sparkles className="mr-2 h-5 w-5" />
+            {t("meetTheAthletes")}
           </Button>
           
           <Button 

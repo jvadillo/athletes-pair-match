@@ -6,6 +6,7 @@ import { scoreboardTranslations } from './scoreboard';
 import { cardTranslations } from './card';
 import { winModalTranslations } from './winModal';
 import { achievementTranslations } from './achievement';
+import { athletesTranslations } from './athletes';
 
 // Merge all translations
 export const allTranslations: Translations = {
@@ -14,5 +15,6 @@ export const allTranslations: Translations = {
   ...scoreboardTranslations,
   ...cardTranslations,
   ...winModalTranslations,
-  ...achievementTranslations
+  ...achievementTranslations,
+  ...athletesTranslations
 };
